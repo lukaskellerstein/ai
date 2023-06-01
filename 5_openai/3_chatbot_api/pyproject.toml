@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "3-chatbot-api"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "3_chatbot_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+openai = "^0.27.7"
+python-dotenv = "^1.0.0"
+fastapi = "^0.95.2"
+uvicorn = "^0.22.0"
+pydantic = "^1.10.8"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

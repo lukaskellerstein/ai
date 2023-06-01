@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import numpy as np
-import tensorflow as tf
 from tensorflow import keras
 
 # ------------------------------------------------------------
@@ -23,7 +21,6 @@ x_test = x_test / 255
 x_train_flatten = x_train.reshape(len(x_train), 28 * 28)
 x_test_flatten = x_test.reshape(len(x_test), 28 * 28)
 
-
 # -------------------
 # Building the model and adding layers
 # -------------------
@@ -37,7 +34,9 @@ model = keras.Sequential(
 # -------------------
 
 model.compile(
-    optimizer="adam", loss="sparse_categorical_crossentropy", metrics=["accuracy"]
+    optimizer="adam",
+    loss="sparse_categorical_crossentropy",
+    metrics=["accuracy"],
 )
 
 # Training the model on the training set
