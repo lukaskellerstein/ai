@@ -12,14 +12,16 @@ from tensorflow import keras
 # SOURCE: https://www.youtube.com/watch?v=O5xeyoRL95U&t=1580s
 # ------------------------------------------------------------
 
-# Get data
+# -------------------
+# 1. Get data
+# -------------------
 (train_images, train_labels), (
     test_images,
     test_labels,
 ) = keras.datasets.mnist.load_data()
 
 # -------------------
-# Building the model and adding layers
+# 2. Building the model and adding layers
 # -------------------
 
 model = keras.Sequential(
@@ -36,7 +38,7 @@ model = keras.Sequential(
 )
 
 # -------------------
-# Training the model
+# 3. Training the model
 # -------------------
 
 # OPTIMIZERS
@@ -146,6 +148,6 @@ test_loss, test_accuracy = model.evaluate(test_images, test_labels)
 print("Test accuracy:", test_accuracy)
 
 # -------------------
-# Predicting ...
+# 4. Predicting ...
 # -------------------
 predictions = model.predict(test_images)
