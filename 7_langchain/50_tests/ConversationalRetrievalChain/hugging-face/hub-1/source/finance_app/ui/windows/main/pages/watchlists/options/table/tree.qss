@@ -1,0 +1,95 @@
+
+
+/* 
+QTreeView::item:selected {
+    background-color:#0069c0;
+    color: white;
+}
+
+QTreeView::item:selected:hover {
+    background-color:#005499;
+    color: white;
+} */
+
+
+
+
+QTreeView::item {
+    /* padding: 5px; */
+    border: 0.5px solid gray;
+}
+
+
+
+
+/* ********************************* */
+/* PARENT ITEM */
+/* ********************************* */
+ 
+QTreeView::item:has-children {
+    background-color: #2196f3;
+}
+
+QTreeView::item:has-children:hover {
+    background-color: #0c89f0;
+}
+
+/* BRANCH */ 
+QTreeView::branch:has-children {
+    background-color: #2196f3;
+}
+QTreeView::branch:has-children:hover {
+    background-color: #0c89f0;
+}
+
+
+
+.profit-color {
+    background-color: #4caf50;
+}
+
+.loss-color {
+    background-color: #f44336;
+}
+
+
+/* ********************************* */
+/* CHILD ITEM */
+/* ********************************* */
+
+QTreeView::item:!has-children {
+    background-color: #6ec6ff;
+}
+
+QTreeView::item:!has-children:hover {
+    background-color: #47b0f7;
+}
+
+/* BRANCH */ 
+QTreeView::branch:!has-children {
+    background-color: #6ec6ff;
+}
+
+
+/* ********************************* */
+/* BRANCH */ 
+/* ********************************* */
+QTreeView::branch:has-children:open {
+    image: url(assets/down-arrow.png);
+    padding: 3px;
+}
+
+QTreeView::branch:has-children:closed{
+    image: url(assets/right-arrow.png);
+    padding: 3px;
+}
+
+
+/* ********************************* */
+/* HEADER */ 
+/* ********************************* */
+QHeaderView {
+    color: #fff;
+    background-color: #000;
+}
+
