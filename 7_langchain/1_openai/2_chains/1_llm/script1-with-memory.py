@@ -5,8 +5,12 @@ from langchain import OpenAI, LLMChain, PromptTemplate
 
 _ = load_dotenv(find_dotenv())  # read local .env file
 
+
 # ---------------------------
+# Generic Chain
+#
 # Text Completion with memory
+#
 # OPEN AI API - POST https://api.openai.com/v1/completions
 # ---------------------------
 

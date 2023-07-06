@@ -8,7 +8,10 @@ _ = load_dotenv(find_dotenv())  # read local .env file
 
 
 # ---------------------------
+# Generic Chain
+#
 # Text Completion in a Chain with Prompt Template
+#
 # OPEN AI API - POST https://api.openai.com/v1/completions
 # ---------------------------
 

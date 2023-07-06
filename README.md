@@ -18,3 +18,35 @@ NEXT STEPS:
 
 8. Udemy Pytorch course - paper replication (how to recreate model according to the scientific/academic research paper)
 9. Udemy Pytorch course - model deployment
+
+## Notes
+
+Release disk space for WSL2: https://stephenreescarter.net/how-to-shrink-a-wsl2-virtual-disk/
+
+## Tutorial
+
+1. Pytorch
+   - ANN
+   - CNN
+   - RNN
+   - Transformer
+2. OpenAI
+   - Prompt
+   - Prompt engineering
+   - Chat
+   - **Chatbot implementation**
+3. Hugging Face
+   - Explore
+     - text2text-generation
+     - text-generation
+     - text-img
+     - text-speech
+     - ...etc
+   - Models = Pre-trained Transformers
+     - Run (32bit, 16bit, 8bit, 4bit) (CPU vs. GPU) (Accelerate)
+     - Train / Fine-tune
+   - Datasets
+   - **Chatbot implementation enhacements**
+     - text to image
+     - text to speech
+4. Langchain
