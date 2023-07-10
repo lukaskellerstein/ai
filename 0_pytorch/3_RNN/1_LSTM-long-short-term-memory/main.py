@@ -135,6 +135,7 @@ def train(dataloader):
         optimizer.step()
         epoch_loss += loss.item()
 
+    # return cumulative loss for whole epoch
     return epoch_loss
 
 
@@ -142,6 +143,7 @@ def evaluate(dataloader):
     epoch_loss = 0
     model.eval()
 
+    # no_grad() prevents updating weights !!!
     with torch.no_grad():
         for batch in dataloader:
             x, y = batch
@@ -149,6 +151,7 @@ def evaluate(dataloader):
             loss = mse(pred[0], y)
             epoch_loss += loss.item()
 
+    # return the average loss for whole epoch
     return epoch_loss / len(dataloader)
 
 

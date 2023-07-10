@@ -13,6 +13,7 @@ Usage:
 > MLPs are typically used for kind of data that has a **tabular-like** topology.
 
 - Text Classification
+- Image classification
 - Regression Problems
 - Anomaly Detection
 
