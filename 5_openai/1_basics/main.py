@@ -7,17 +7,20 @@ _ = load_dotenv(find_dotenv())
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def get_completion(prompt, model="gpt-3.5-turbo"):
+def get_completion(prompt, model="gpt-4"):
     messages = [{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
-        temperature=0,  # this is the degree of randomness of the model's output
+        temperature=1,  # this is the degree of randomness of the model's output
     )
     return response.choices[0].message["content"]
 
 
-text = f"""
+prompt = f"""
+Summarize the text delimited by triple backticks \ 
+into a single sentence.
+```
 You should express what you want a model to do by \ 
 providing instructions that are as clear and \ 
 specific as you can possibly make them. \ 
@@ -28,11 +31,7 @@ clear prompt with writing a short prompt. \
 In many cases, longer prompts provide more clarity \ 
 and context for the model, which can lead to \ 
 more detailed and relevant outputs.
-"""
-prompt = f"""
-Summarize the text delimited by triple backticks \ 
-into a single sentence.
-```{text}```
+```
 """
 response = get_completion(prompt)
 print(response)

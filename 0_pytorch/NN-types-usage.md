@@ -6,6 +6,8 @@ Basic and general NN.
 
 Basic NN. Just for educational purposes, no real usage.
 
+- Binary classification
+
 ## MLP - Multi Level Perceptron
 
 Usage:

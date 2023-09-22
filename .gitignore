@@ -6,4 +6,8 @@ node_modules
 
 data
 
+runs
+
 dist
+
+__pycache__

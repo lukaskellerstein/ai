@@ -1,171 +1,153 @@
-# Import necessary libraries
+import time
 import torch
 import torch.nn as nn
-import torchvision
-import torchvision.transforms as transforms
 import matplotlib.pyplot as plt
-import numpy as np
 from torch.utils.data import DataLoader
+from data import train_dataset, valid_dataset, test_dataset
+from model import MLP
+from epochs import run_epochs, test
+from torch.utils.tensorboard import SummaryWriter
+from helpers import plot_to_image
+
+writer = SummaryWriter()
+
+start = time.time()
 
 # -------------------------------------------------
 # -------------------------------------------------
 # Multi Layer Perceptron
-# for Image CLASIFFICATION
+# for Image Classification
 # -------------------------------------------------
 # -------------------------------------------------
+
 
 # Hyper-parameters
 input_size = 784  # 28x28 images flattened into a 784 dimensional vector
 hidden_size = 500
-num_classes = 10
-num_epochs = 6
+output_size = 10
+num_epochs = 10
 batch_size = 100
 learning_rate = 0.001
-
-# Device configuration (runs on GPU if available)
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+patience = 5
 
 # -------------------
 # Data
 # -------------------
 
-# MNIST dataset
-train_dataset = torchvision.datasets.MNIST(
-    root="./data", train=True, transform=transforms.ToTensor(), download=True
-)
-train_dataset.train_data.to(torch.device("cuda:0"))  # put data into GPU entirely
-train_dataset.train_labels.to(torch.device("cuda:0"))
-
-test_dataset = torchvision.datasets.MNIST(
-    root="./data", train=False, transform=transforms.ToTensor()
-)
-test_dataset.train_data.to(torch.device("cuda:0"))  # put data into GPU entirely
-test_dataset.train_labels.to(torch.device("cuda:0"))
-
-
-# Data loader
-train_loader = DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
-
-test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, shuffle=False)
-
+train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+valid_loader = DataLoader(valid_dataset, batch_size=batch_size, shuffle=False)
+test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
 # -------------------
 # Model - Multi layer Perceptron
 # -------------------
-class NeuralNet(nn.Module):
-    def __init__(self, input_size, hidden_size, num_classes):
-        super(NeuralNet, self).__init__()
-        self.layers = nn.Sequential(
-            nn.Linear(input_size, hidden_size),
-            nn.ReLU(),
-            nn.Linear(hidden_size, num_classes),
-        )
-
-    def forward(self, x):
-        return self.layers(x)
+model = MLP(input_size, hidden_size, output_size)
 
 
-model = NeuralNet(input_size, hidden_size, num_classes).to(device)
+# Fetching a single batch from the train_loader
+X_train, _ = next(iter(train_loader))
+
+# Adding model structure to Tensorboard
+writer.add_graph(model, X_train[0].unsqueeze(0))
+
 
 # -------------------------------------------------
 # -------------------------------------------------
-# EPOCHS - Training + Evaluation
+# Training + Evaluation
 # -------------------------------------------------
 # -------------------------------------------------
 # Loss function
-criterion = nn.CrossEntropyLoss()
+loss_fn = nn.CrossEntropyLoss()
 
 # Finding optimal Loss function = Stochastic gradient descent
 optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
 
 
-# Training function ------------
-def train(dataloader):
-    model.train()
-    epoch_loss = 0
-
-    n_total_steps = len(dataloader)
-
-    for i, (images, labels) in enumerate(dataloader):
-        images = images.reshape(-1, 28 * 28).to(device)
-        labels = labels.to(device)
-
-        # Forward pass
-        outputs = model(images)
-        loss = criterion(outputs, labels)
-
-        # Backward and optimize
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-
-        epoch_loss += loss.item()
-
-        # print(f"Step [{i+1}/{n_total_steps}], Loss: {loss.item():.4f}")
-
-    # return average loss for whole epoch
-    return epoch_loss / len(dataloader)
-
-
-# Evaluate function ------------
-def evaluate(dataloader):
-    model.eval()
-    epoch_loss = 0
-
-    with torch.no_grad():
-        for images, labels in dataloader:
-            images = images.reshape(-1, 28 * 28).to(device)
-            labels = labels.to(device)
-
-            outputs = model(images)
-            loss = criterion(outputs, labels)
-            epoch_loss += loss.item()
-
-    # return the average loss for whole epoch
-    return epoch_loss / len(dataloader)
-
-
 # -------------------
 # EPOCHS CYCLE
 # -------------------
-train_losses = []
-eval_losses = []
-best_valid_loss = float("inf")
+results = run_epochs(
+    num_epochs, model, train_loader, valid_loader, loss_fn, optimizer, patience
+)
 
-for epoch in range(num_epochs):
-    train_loss = train(train_loader)
-    valid_loss = evaluate(test_loader)
-
-    # save losses
-    train_losses.append(train_loss)
-    eval_losses.append(valid_loss)
-
-    # save the best model
-    if valid_loss < best_valid_loss:
-        best_valid_loss = valid_loss
-        torch.save(model, "saved_weights.pt")
-
-    print("Epoch ", epoch + 1)
-    print(f"\tTrain Loss: {train_loss:.5f}")
-    print(f"\tVal Loss: {valid_loss:.5f}\n")
+# Adding results from epochs to Tensorboard
+for epoch in range(results["last_epoch"]):
+    writer.add_scalar("Loss/train", results["train_losses"][epoch], epoch)
+    writer.add_scalar("Accuracy/train", results["train_accuracy"][epoch], epoch)
+    writer.add_scalar("Loss/eval", results["valid_losses"][epoch], epoch)
+    writer.add_scalar("Accuracy/eval", results["valid_accuracy"][epoch], epoch)
 
 # -------------------
 # Plotting results
 # -------------------
-# Plot of the training losses
-plt.figure(figsize=(10, 5))
-plt.plot(train_losses, label="Training loss")
-plt.title("Training Losses")
-plt.xlabel("Batch")
+figure = plt.figure(figsize=(10, 5))
+plt.plot(results["train_losses"], label="Training loss")
+plt.plot(results["valid_losses"], label="Validation loss")
+plt.title("Training and Validation Losses")
+plt.xlabel("Epoch")
 plt.ylabel("Loss")
 plt.legend()
-plt.savefig("training_losses.png")
+plt.grid(True)
+image = plot_to_image(figure)
+writer.add_image("Loss", image, num_epochs)
 
-# Plot of the evaluation accuracies
-plt.figure(figsize=(10, 5))
-plt.plot(eval_losses, label="Test accuracy")
-plt.title("Test Accuracies")
+figure = plt.figure(figsize=(10, 5))
+plt.plot(results["train_accuracy"], label="Training accuracy")
+plt.plot(results["valid_accuracy"], label="Validation accuracy")
+plt.title("Training and Validation Accuracy")
 plt.xlabel("Epoch")
-plt.ylabel("Accuracy (%)")
+plt.ylabel("Accuracy")
 plt.legend()
-plt.savefig("evaluate_losses.png")
+plt.grid(True)
+image = plot_to_image(figure)
+writer.add_image("Accuracy", image, num_epochs)
+
+
+# -------------------------------------------------
+# -------------------------------------------------
+# TEST = testing model on unseen data
+# -------------------------------------------------
+# -------------------------------------------------
+model.load_state_dict(torch.load("saved_weights.pt"))
+
+test_loss, test_acc, predicted_values, actual_values = test(model, test_loader, loss_fn)
+
+print(f"Test Loss: {test_loss:.4f}\n")
+print(f"Test Accuracy: {test_acc:.4f}")
+
+# Plotting test loss and accuracy
+for i in range(results["last_epoch"]):
+    writer.add_scalar("Loss/test", test_loss, i)
+    writer.add_scalar("Accuracy/test", test_acc, i)
+
+# Plotting predicted and actual binary outcomes
+figure = plt.figure(figsize=(10, 5))
+plt.plot(predicted_values, label="Predicted values")
+plt.plot(actual_values, label="Actual values")
+plt.title("Predicted and Actual values on Test Set")
+plt.xlabel("Count")
+plt.ylabel("Value")
+plt.legend()
+plt.grid(True)
+image = plot_to_image(figure)
+writer.add_image("Predictions vs Actual values", image, num_epochs)
+
+
+# Plotting difference between predicted and actual binary outcomes
+figure = plt.figure(figsize=(10, 5))
+plt.plot(
+    predicted_values - actual_values, label="Difference between Predicted and Actual"
+)
+plt.title("Difference between Predicted and Actual Binary Outcomes on Test Set")
+plt.xlabel("Prediction count")
+plt.ylabel("Difference")
+plt.legend()
+plt.grid(True)
+image = plot_to_image(figure)
+writer.add_image("Difference between Predicted and Actual values", image, num_epochs)
+
+writer.close()
+
+
+end = time.time()
+print(f"NN takes: {end - start} sec.")

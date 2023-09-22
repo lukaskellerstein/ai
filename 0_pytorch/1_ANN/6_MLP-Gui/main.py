@@ -52,10 +52,6 @@ app = QtWidgets.QApplication(sys.argv)
 w = MainWindow()
 
 
-# -------------------
-# SOURCE: https://github.com/iam-mhaseeb/Multi-Layer-Perceptron-MNIST-with-PyTorch/blob/master/mnist_mlp_exercise.ipynb
-# -------------------
-
 # --------- CUDA ---------
 # Setup device agnostic code
 # device = "cuda" if torch.cuda.is_available() else "cpu"

@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "project1"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = { url = "https://download.pytorch.org/whl/cu118/torch-2.0.1%2Bcu118-cp310-cp310-linux_x86_64.whl" }
+matplotlib = "^3.7.1"
+numpy = "^1.24.3"
+pandas = "^2.0.2"
+tensorboard = "^2.13.0"
+scikit-learn = "^1.2.2"
+mplfinance = "^0.12.9b7"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
