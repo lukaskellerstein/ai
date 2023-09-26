@@ -1,0 +1,3 @@
+langchain>=0.0.300
+huggingface-hub>=0.14.1
+python-dotenv>=1.0.0
