@@ -1,10 +1,15 @@
 import autogen
-from dotenv import load_dotenv, find_dotenv
 
-_ = load_dotenv(find_dotenv())  # read local .env file
+# from dotenv import load_dotenv, find_dotenv
+# _ = load_dotenv(find_dotenv())  # read local .env file
 
-config_list = autogen.config_list_from_models(model_list=["gpt-4"])
-
+# config_list = autogen.config_list_from_models(model_list=["gpt-4"])
+config_list = autogen.config_list_from_json(
+    "OAI_CONFIG_LIST",
+    filter_dict={
+        "model": ["gpt-35-turbo-16k"],
+    },
+)
 
 # create an AssistantAgent instance named "assistant"
 assistant = autogen.AssistantAgent(
@@ -24,7 +29,6 @@ user_proxy = autogen.UserProxyAgent(
     is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),
     code_execution_config={"work_dir": "temp_dir_0"},
 )
-
 
 # the assistant receives a message from the user, which contains the task description
 user_proxy.initiate_chat(

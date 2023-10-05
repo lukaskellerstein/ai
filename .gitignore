@@ -13,3 +13,5 @@ dist
 __pycache__
 
 my-new-env
+
+OAI_CONFIG_LIST.json
