@@ -1,17 +1,12 @@
 import openai
+import os
+from dotenv import load_dotenv, find_dotenv
+_ = load_dotenv(find_dotenv())
 
-# import os
-# from dotenv import load_dotenv, find_dotenv
-
-# _ = load_dotenv(find_dotenv())
-
-# openai.api_key = os.getenv("OPENAI_API_KEY")
-
-openai.api_type = "azure"
-openai.api_key = "af44c574ba6246189f5e38fa564c9948"
-openai.api_base = "https://ai-openai-lk-01.openai.azure.com"
-openai.api_version = "2023-05-15"  # subject to change
-
+openai.api_type = os.getenv("API_TYPE")
+openai.api_key = os.getenv("API_KEY")
+openai.api_base = os.getenv("API_BASE")
+openai.api_version = os.getenv("API_VERSION")
 
 def get_completion(prompt, model="gpt-35-turbo-16k-deployment"):
     messages = [{"role": "user", "content": prompt}]
