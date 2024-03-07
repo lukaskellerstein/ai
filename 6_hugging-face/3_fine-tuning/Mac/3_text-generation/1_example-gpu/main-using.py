@@ -11,12 +11,15 @@ model = model.to("mps")
 tokenizer = AutoTokenizer.from_pretrained("SAVED_TOKENIZER")
 
 # Create a pipeline for text generation
-my_pipeline = pipeline("text-generation", model=model, tokenizer=tokenizer)
+my_pipeline = pipeline("text-generation", 
+                       model=model, 
+                       tokenizer=tokenizer, 
+                       device="mps")
 
 # Your new sentences
 data = [
     {"role": "user", "content": "Which is bigger, the moon or the earth?"},
-    {"role": "user", "content": "Which is bigger, a atom or a virus?"}
+    {"role": "user", "content": "Which is bigger, a atom or a virus?"},
 ]
 
 # Use the model to generate responses

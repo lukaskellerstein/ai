@@ -1,0 +1,2 @@
+
+Create a game snake in python. Write a code, so I can copy paste it and run it.

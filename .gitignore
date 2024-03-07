@@ -15,3 +15,6 @@ __pycache__
 my-new-env
 
 OAI_CONFIG_LIST.json
+SAVED_MODEL
+SAVED_TOKENIZER
+SAVED_TRAINING
