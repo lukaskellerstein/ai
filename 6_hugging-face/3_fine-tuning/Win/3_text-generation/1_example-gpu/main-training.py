@@ -92,6 +92,8 @@ trainer = Trainer(
     compute_metrics=compute_metrics,
 )
 
+trainer.train()
+
 print(trainer.evaluate())
 
 

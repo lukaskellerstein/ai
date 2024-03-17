@@ -20,24 +20,30 @@ model_name = "mistralai/Mistral-7B-v0.1"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 
+
 def encode_chat(chat):
     # Apply the chat template
-    formatted_chat = tokenizer.apply_chat_template(chat["chat"], tokenize=False, add_generation_prompt=False)
+    formatted_chat = tokenizer.apply_chat_template(
+        chat["chat"], tokenize=False, add_generation_prompt=False
+    )
 
     # Tokenize the formatted chat
     # This should return a dictionary with keys like 'input_ids', 'attention_mask', etc.
-    encoded_chat = tokenizer(formatted_chat, truncation=True, padding='max_length', max_length=512)
+    encoded_chat = tokenizer(
+        formatted_chat, truncation=True, padding="max_length", max_length=512
+    )
 
     return encoded_chat
+
 
 # Train dataset
 chat1 = [
     {"role": "user", "content": "Which is bigger, the moon or the sun?"},
-    {"role": "assistant", "content": "The sun."}
+    {"role": "assistant", "content": "The sun."},
 ]
 chat2 = [
     {"role": "user", "content": "Which is bigger, a virus or a bacterium?"},
-    {"role": "assistant", "content": "A bacterium."}
+    {"role": "assistant", "content": "A bacterium."},
 ]
 
 train_dataset = Dataset.from_dict({"chat": [chat1, chat2]})
@@ -46,11 +52,11 @@ train_dataset = train_dataset.map(encode_chat)
 # Eval dataset
 chat3 = [
     {"role": "user", "content": "Which is hotter, the sun or the earth?"},
-    {"role": "assistant", "content": "The sun."}
+    {"role": "assistant", "content": "The sun."},
 ]
 chat4 = [
     {"role": "user", "content": "Which is bigger, an atom or a molecule?"},
-    {"role": "assistant", "content": "A molecule."}
+    {"role": "assistant", "content": "A molecule."},
 ]
 
 eval_dataset = Dataset.from_dict({"chat": [chat3, chat4]})
@@ -85,6 +91,8 @@ trainer = Trainer(
     eval_dataset=eval_dataset,
     compute_metrics=compute_metrics,
 )
+
+trainer.train()
 
 print(trainer.evaluate())
 

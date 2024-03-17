@@ -14,6 +14,7 @@ from dotenv import load_dotenv, find_dotenv
 from huggingface_hub import login
 import os
 import time
+import matplotlib.pyplot as plt
 
 _ = load_dotenv(find_dotenv())  # read local .env file
 

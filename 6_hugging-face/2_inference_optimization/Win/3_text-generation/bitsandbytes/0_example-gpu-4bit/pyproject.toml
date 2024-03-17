@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "project2"
+name = "project1"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
@@ -11,7 +11,6 @@ torch = "^2.2.1"
 bitsandbytes = "^0.42.0"
 accelerate = "^0.27.2"
 transformers = "^4.38.2"
-peft = "^0.9.0"
 
 [build-system]
 requires = ["poetry-core"]

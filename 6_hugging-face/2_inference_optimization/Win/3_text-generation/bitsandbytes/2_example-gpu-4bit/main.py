@@ -3,7 +3,6 @@ from transformers import (
     BitsAndBytesConfig,
     AutoModelForCausalLM,
     AutoTokenizer,
-    pipeline,
 )
 import torch
 from datetime import timedelta
@@ -39,12 +38,18 @@ model_4bit = AutoModelForCausalLM.from_pretrained(
 # Using
 # ----------------------------------
 
-# Create a pipeline for text generation
-my_pipeline = pipeline("text-generation", model=model_4bit, tokenizer=tokenizer)
+# Define the prompt
+prompt = "In this course, we will teach you how to"
 
-result = my_pipeline("In this course, we will teach you how to", max_new_tokens=50)
+# Tokenize the prompt
+input_ids = tokenizer.encode(prompt, return_tensors="pt")
 
-print(result)
+# Generate text
+output = model_4bit.generate(input_ids, max_length=100, num_return_sequences=1)
+
+# Decode and print the generated text
+output_text = tokenizer.decode(output[0], skip_special_tokens=True)
+print(output_text)
 
 # ----------------------------------
 # Total time for the script
