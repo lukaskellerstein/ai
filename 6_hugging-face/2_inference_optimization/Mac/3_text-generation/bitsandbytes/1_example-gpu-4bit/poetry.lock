@@ -183,13 +183,13 @@ typing = ["typing-extensions (>=4.8)"]
 
 [[package]]
 name = "fsspec"
-version = "2024.2.0"
+version = "2024.3.0"
 description = "File-system specification"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "fsspec-2024.2.0-py3-none-any.whl", hash = "sha256:817f969556fa5916bc682e02ca2045f96ff7f586d45110fcb76022063ad2c7d8"},
-    {file = "fsspec-2024.2.0.tar.gz", hash = "sha256:b6ad1a679f760dda52b1168c859d01b7b80648ea6f7f7c7f5a8a91dc3f3ecb84"},
+    {file = "fsspec-2024.3.0-py3-none-any.whl", hash = "sha256:779001bd0122c9c4975cf03827d5e86c3afb914a3ae27040f15d341ab506a693"},
+    {file = "fsspec-2024.3.0.tar.gz", hash = "sha256:f13a130c0ed07e15c4e1aeb0472a823e9c426b0b5792a1f40d902b0a71972d43"},
 ]
 
 [package.extras]
@@ -569,13 +569,13 @@ files = [
 
 [[package]]
 name = "packaging"
-version = "23.2"
+version = "24.0"
 description = "Core utilities for Python packages"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "packaging-23.2-py3-none-any.whl", hash = "sha256:8c491190033a9af7e1d931d0b5dacc2ef47509b34dd0de67ed209b5203fc88c7"},
-    {file = "packaging-23.2.tar.gz", hash = "sha256:048fb0e9405036518eaaf48a55953c750c11e1a1b68e0dd1a9d62ed0c092cfc5"},
+    {file = "packaging-24.0-py3-none-any.whl", hash = "sha256:2ddfb553fdf02fb784c234c7ba6ccc288296ceabec964ad2eae3777778130bc5"},
+    {file = "packaging-24.0.tar.gz", hash = "sha256:eb82c5e3e56209074766e6885bb04b8c38a0c015d0a30036ebe7ece34c9989e9"},
 ]
 
 [[package]]
