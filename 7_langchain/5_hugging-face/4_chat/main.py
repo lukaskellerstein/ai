@@ -3,8 +3,10 @@ from dotenv import load_dotenv, find_dotenv
 from langchain import PromptTemplate, LLMChain
 from langchain.memory import ConversationBufferMemory
 from langchain.llms import HuggingFaceEndpoint
+import os
 
 _ = load_dotenv(find_dotenv())  # read local .env file
+hf_token = os.getenv("HF_TOKEN")
 
 
 start = time.time()
@@ -37,7 +39,7 @@ endpoint_url = (
 )
 llm = HuggingFaceEndpoint(
     endpoint_url=endpoint_url,
-    huggingfacehub_api_token="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",
+    huggingfacehub_api_token=hf_token,
     task="text-generation",
 )
 
