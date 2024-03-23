@@ -6,8 +6,12 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.10.6"
-python-dotenv = "^1.0.0"
+python = "^3.10"
+huggingface-hub = "^0.21.4"
+python-dotenv = "^1.0.1"
+bitsandbytes = "^0.42.0"
+accelerate = "^0.27.2"
+transformers = "^4.38.2"
 
 [build-system]
 requires = ["poetry-core"]

@@ -306,20 +306,21 @@ trainer = Trainer(
 print("Start training...")
 startTrain = time.time()
 trainer.train()
-print(f"Training takes:  {(time.time() - startTrain)} sec.")
+td = timedelta(seconds=(time.time() - startTrain))
+print(f"Training takes: {td}")
 
 # ----------------------------------
 # Save the model to the local directory
 # ----------------------------------
 
-# This line saves the fine-tuned model in a way that it can be easily re-loaded using the from_pretrained method of the Transformers library. This is useful for deploying the model in different environments or for sharing it with others. The model saved this way includes the architecture along with the learned weights.
-trainer.model.save_pretrained("SAVED_PRETRAINED_MODEL")
+# # This line saves the fine-tuned model in a way that it can be easily re-loaded using the from_pretrained method of the Transformers library. This is useful for deploying the model in different environments or for sharing it with others. The model saved this way includes the architecture along with the learned weights.
+# trainer.model.save_pretrained("SAVED_PRETRAINED_MODEL")
 
-# This line saves the entire model, including the configuration, tokenizer, and optimizer state, using the Trainer's internal saving mechanism. It's a comprehensive save that's meant for resuming training later or for inference without needing to reconfigure everything. This method might create a slightly larger set of files because it includes additional state information beyond just the model weights and configuration.
-trainer.save_model("SAVED_MODEL")
+# # This line saves the entire model, including the configuration, tokenizer, and optimizer state, using the Trainer's internal saving mechanism. It's a comprehensive save that's meant for resuming training later or for inference without needing to reconfigure everything. This method might create a slightly larger set of files because it includes additional state information beyond just the model weights and configuration.
+# trainer.save_model("SAVED_MODEL")
 
-# This line saves the tokenizer used during the training and preprocessing of the data. The tokenizer is crucial for preparing input data for the model in the same way it was done during training. Saving it ensures consistency between training and inference phases, allowing you to encode new data in exactly the same manner as the training data.
-tokenizer.save_pretrained("SAVED_TOKENIZER")
+# # This line saves the tokenizer used during the training and preprocessing of the data. The tokenizer is crucial for preparing input data for the model in the same way it was done during training. Saving it ensures consistency between training and inference phases, allowing you to encode new data in exactly the same manner as the training data.
+# tokenizer.save_pretrained("SAVED_TOKENIZER")
 
 # ----------------------------------
 # Evaluate
@@ -327,7 +328,8 @@ tokenizer.save_pretrained("SAVED_TOKENIZER")
 print("Start evaluating...")
 startEval = time.time()
 print(trainer.evaluate())
-print(f"Training takes:  {(time.time() - startEval)} sec.")
+td = timedelta(seconds=(time.time() - startEval))
+print(f"Evaluate takes: {td}")
 
 # Total time for the script
 td = timedelta(seconds=(time.time() - start))

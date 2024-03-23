@@ -3,6 +3,7 @@ from transformers import (
     BitsAndBytesConfig,
     AutoModelForCausalLM,
     AutoTokenizer,
+    pipeline,
 )
 import torch
 from datetime import timedelta
@@ -16,11 +17,12 @@ start = time.time()
 # ----------------------------------
 
 # Model
-model_name = "mistralai/Mistral-7B-v0.1"
+model_path = "/home/lukas/Models/3_example-qlora/SAVED_FINE-TUNED/MODEL"
 
 
 # Load the trained model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer_path = "/home/lukas/Models/3_example-qlora/SAVED_FINE-TUNED/TOKENIZER"
+tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
 
 
 bnb_config = BitsAndBytesConfig(
@@ -30,12 +32,12 @@ bnb_config = BitsAndBytesConfig(
 )
 
 model_4bit = AutoModelForCausalLM.from_pretrained(
-    model_name, device_map="auto", quantization_config=bnb_config
+    model_path, device_map="auto", quantization_config=bnb_config
 )
 
 
 # ----------------------------------
-# Using
+# Using Model and Tokenizer directly
 # ----------------------------------
 
 # Define the prompt
@@ -49,6 +51,17 @@ output = model_4bit.generate(input_ids, max_length=100, num_return_sequences=1)
 
 # Decode and print the generated text
 output_text = tokenizer.decode(output[0], skip_special_tokens=True)
+print(output_text)
+
+# ----------------------------------
+# Using Pipeline
+# ----------------------------------
+prompt = "In this course, we will teach you how to"
+
+# Create a pipeline for text generation
+my_pipeline = pipeline("text-generation", model=model_4bit, tokenizer=tokenizer)
+
+output_text = my_pipeline(prompt, max_new_tokens=100)
 print(output_text)
 
 # ----------------------------------
