@@ -19,5 +19,4 @@ SAVED_MODEL
 SAVED_TOKENIZER
 SAVED_TRAINING
 
-#.DS_Store
-#__pycache__
+.DS_Store
