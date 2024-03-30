@@ -1,7 +1,0 @@
-QWidget#searchInput {
-    background-color: white;
-}
-
-QWidget#searchInput::hover {
-    border-bottom: 2px solid #9ea7aa
-}

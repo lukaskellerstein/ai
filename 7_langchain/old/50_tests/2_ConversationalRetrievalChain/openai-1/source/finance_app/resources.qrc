@@ -1,9 +1,0 @@
-<!DOCTYPE RCC><RCC version="1.0">
-<qresource prefix="/assets">
-    <file alias="delete-icon">assets/delete.png</file>
-    <file alias="right-arrow-icon">assets/right-arrow.png</file>
-    <file alias="down-arrow-icon">assets/down-arrow.png</file>
-    <file alias="search-icon">assets/search.png</file>
-    <file alias="search-svg-icon">assets/search.svg</file>
-</qresource>
-</RCC>

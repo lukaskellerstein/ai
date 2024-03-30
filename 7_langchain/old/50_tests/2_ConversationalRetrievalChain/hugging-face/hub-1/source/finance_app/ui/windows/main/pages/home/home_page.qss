@@ -1,8 +1,0 @@
-QWidget#homePage {
-    background-color: #2196f3;
-}
-
-QLabel#label {
-    background-color: transparent;
-}
-
