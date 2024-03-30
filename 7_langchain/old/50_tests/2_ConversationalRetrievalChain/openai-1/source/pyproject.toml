@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "finance-app"
+version = "0.1.0"
+description = ""
+authors = ["Lukas Kellerstein <lukas.kellerstein@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pyqt5 = "5.14.0"
+pyqtgraph = "^0.10.0"
+numpy = "^1.18.2"
+pandas = "^1.0.3"
+matplotlib = "^3.2.1"
+rx = "^3.1.0"
+pymongo = "^3.10.1"
+pylint = "^2.4.4"
+QuantLib = "^1.18"
+pystore = "0.1.22"
+trading_calendars = "^1.11.7"
+holidays = "^0.10.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+flake8 = "^3.7.9"
+black = "^19.10b0"
+rope = "^0.16.0"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
