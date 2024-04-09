@@ -6,7 +6,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from langchain_community.chat_models import ChatOllama
 
-embeddings = OllamaEmbeddings(model="mistral")
+embeddings = OllamaEmbeddings(model="mistral:v0.2")
 
 # load DB from disk
 db = Chroma(persist_directory="./chroma_db", embedding_function=embeddings)

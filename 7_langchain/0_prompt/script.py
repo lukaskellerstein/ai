@@ -8,6 +8,7 @@ from langchain.schema import AIMessage, HumanMessage, SystemMessage
 # prompt
 prompt = "What is a good name for a company that makes colorful socks?"
 print("---- Prompt ----")
+print(type(prompt))
 print(prompt)
 
 # ----------------------
@@ -23,6 +24,7 @@ promptemplate = PromptTemplate(
 # prompt
 prompt = promptemplate.format(product="colorful socks")
 print("---- Prompt ----")
+print(type(prompt))
 print(prompt)
 
 # ----------------------
@@ -36,6 +38,7 @@ promp_template = PromptTemplate.from_template(template)
 # prompt
 prompt = promp_template.format(product="colorful socks")
 print("---- Prompt ----")
+print(type(prompt))
 print(prompt)
 
 # ----------------------
@@ -50,6 +53,7 @@ prompt_template = ChatPromptTemplate.from_template(template)
 # prompt
 prompt = promp_template.format(product="colorful socks")
 print("---- Prompt ----")
+print(type(prompt))
 print(prompt)
 
 
@@ -58,18 +62,37 @@ print(prompt)
 # (allows creating a template for a list of chat messages)
 # ----------------------
 
-messages = [
+prompt_template = ChatPromptTemplate.from_messages([
     ("system", "You are AI assistant"),
     ("human", "hi {name}"),
     ("ai", "hello"),
     ("human", "What is a good name for a company that makes {product}?"),
-]
-
-prompt_template = ChatPromptTemplate.from_messages(messages)
+])
 
 prompt = prompt_template.format_messages(
     name="Lukas",
     product="colorful socks"
 )
 print("---- Prompt ----")
+print(type(prompt))
+print(prompt)
+
+
+
+# ----------------------
+# ???
+# ----------------------
+prompt = [
+    {
+        "role": "system",
+        "content": "You are a helpful assistant with output as Shakespear.",
+    },
+    {
+        "role": "user",
+        "content": "What would be a good company name for a company that makes colorful socks?",
+    },
+]
+
+print("---- Prompt ----")
+print(type(prompt))
 print(prompt)
