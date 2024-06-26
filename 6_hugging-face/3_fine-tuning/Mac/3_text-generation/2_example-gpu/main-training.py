@@ -22,18 +22,24 @@ model_name = "mistralai/Mistral-7B-v0.1"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer.pad_token = tokenizer.eos_token
 
+
 def encode_chat(chat):
     # Apply the chat template
-    formatted_chat = tokenizer.apply_chat_template(chat["chat"], tokenize=False, add_generation_prompt=False)
+    formatted_chat = tokenizer.apply_chat_template(
+        chat["chat"], tokenize=False, add_generation_prompt=False
+    )
 
     # Tokenize the formatted chat
     # This should return a dictionary with keys like 'input_ids', 'attention_mask', etc.
-    encoded_chat = tokenizer(formatted_chat, truncation=True, padding='max_length', max_length=512)
+    encoded_chat = tokenizer(
+        formatted_chat, truncation=True, padding="max_length", max_length=512
+    )
 
     # Add labels for language modeling
     encoded_chat["labels"] = torch.tensor(encoded_chat["input_ids"]).clone()
 
     return encoded_chat
+
 
 # Train dataset
 train_dataset = Dataset.from_dict({"chat": [train_data]})
@@ -48,6 +54,10 @@ eval_dataset = eval_dataset.map(encode_chat)
 # ----------------------------------
 model = AutoModelForCausalLM.from_pretrained(model_name)
 model = model.to("mps")
+
+# Model architecture
+print(model.config)
+
 
 # ----------------------------------
 # Training WITH evaluation (metrics)
@@ -87,4 +97,4 @@ tokenizer.save_pretrained("SAVED_TOKENIZER")
 end = time.time()
 print(f"NN takes: {end - start} sec.")
 
-#{'eval_runtime': 2.5533, 'eval_samples_per_second': 0.392, 'eval_steps_per_second': 0.392}
+# {'eval_runtime': 2.5533, 'eval_samples_per_second': 0.392, 'eval_steps_per_second': 0.392}

@@ -1,21 +1,12 @@
-import openai
+import requests
 import os
 from dotenv import load_dotenv, find_dotenv
 
 _ = load_dotenv(find_dotenv())
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+api_key = os.environ.get("OPENAI_API_KEY")
 
-
-def get_completion(prompt, model="gpt-4"):
-    messages = [{"role": "user", "content": prompt}]
-    response = openai.ChatCompletion.create(
-        model=model,
-        messages=messages,
-        temperature=1,  # this is the degree of randomness of the model's output
-    )
-    return response.choices[0].message["content"]
-
+headers = {"Content-Type": "application/json", "Authorization": f"Bearer {api_key}"}
 
 prompt = f"""
 Summarize the text delimited by triple backticks \ 
@@ -33,5 +24,16 @@ and context for the model, which can lead to \
 more detailed and relevant outputs.
 ```
 """
-response = get_completion(prompt)
-print(response)
+
+data = {
+    "model": "gpt-4",
+    "messages": [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": prompt},
+    ],
+}
+
+response = requests.post(
+    "https://api.openai.com/v1/chat/completions", headers=headers, json=data
+)
+print(response.json())

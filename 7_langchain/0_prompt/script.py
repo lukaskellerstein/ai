@@ -62,21 +62,19 @@ print(prompt)
 # (allows creating a template for a list of chat messages)
 # ----------------------
 
-prompt_template = ChatPromptTemplate.from_messages([
-    ("system", "You are AI assistant"),
-    ("human", "hi {name}"),
-    ("ai", "hello"),
-    ("human", "What is a good name for a company that makes {product}?"),
-])
-
-prompt = prompt_template.format_messages(
-    name="Lukas",
-    product="colorful socks"
+prompt_template = ChatPromptTemplate.from_messages(
+    [
+        ("system", "You are AI assistant"),
+        ("human", "hi {name}"),
+        ("ai", "hello"),
+        ("human", "What is a good name for a company that makes {product}?"),
+    ]
 )
+
+prompt = prompt_template.format_messages(name="Lukas", product="colorful socks")
 print("---- Prompt ----")
 print(type(prompt))
 print(prompt)
-
 
 
 # ----------------------

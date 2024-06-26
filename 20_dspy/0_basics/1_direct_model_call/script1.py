@@ -2,7 +2,7 @@ import dspy
 from dspy import OllamaLocal
 
 # model
-model = OllamaLocal(model='mistral:v0.2')
+model = OllamaLocal(model="mistral:v0.2")
 dspy.configure(lm=model)
 
 
@@ -17,7 +17,7 @@ print(result)
 # call model as DSPy
 # ------------------------------------------
 print("---- DSPy call ----")
-qa = dspy.Predict('input -> output')
+qa = dspy.Predict("input -> output")
 print(qa.signature)
 
 input = "Tell me a joke."

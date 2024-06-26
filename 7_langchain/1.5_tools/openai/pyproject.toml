@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "3-custom-functions"
+name = "project1"
 version = "0.1.0"
 description = ""
 authors = ["Your Name <you@example.com>"]
@@ -7,10 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-openai = "^1.26.0"
-python-dotenv = "^1.0.0"
-yfinance = "^0.2.31"
-
+python-dotenv = "^1.0.1"
+openai = "^1.14.2"
+langchain = "^0.2.3"
+langchain-community = "^0.2.4"
+langchain-core = "^0.2.5"
+langchain-openai = "^0.1.8"
+langchain-experimental = "^0.0.60"
 
 [build-system]
 requires = ["poetry-core"]

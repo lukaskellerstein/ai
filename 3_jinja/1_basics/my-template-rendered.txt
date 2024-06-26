@@ -1,0 +1,5 @@
+Hello, John Doe
+You are admin
+
+system: You are a helpful assistant.
+user: Summarize the text delimited by triple backticks into a single sentence.

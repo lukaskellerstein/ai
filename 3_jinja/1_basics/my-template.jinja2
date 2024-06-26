@@ -1,0 +1,10 @@
+Hello, {{payload.name}}
+{% if payload.role == "admin" %}
+You are admin
+{% else %}
+You are not admin
+{% endif %}
+
+{% for message in payload.messages %}
+{{message.role}}: {{message.content}}
+{% endfor %}

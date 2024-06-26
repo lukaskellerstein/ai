@@ -5,12 +5,6 @@ from langchain_core.callbacks import BaseCallbackHandler
 from langchain_community.tools.tavily_search import TavilySearchResults
 
 # ----------------------
-# Tools
-# ----------------------
-tools = [TavilySearchResults(max_results=1)]
-
-
-# ----------------------
 # Prompt
 # ----------------------
 
@@ -56,7 +50,6 @@ print(type(prompt))
 print(prompt)
 
 
-
 # ----------------------
 # Custom callback - to track what is happening during invoking
 # ----------------------
@@ -82,7 +75,6 @@ class MyCustomHandler(BaseCallbackHandler):
         # print(kwargs)
 
 
-
 # ----------------------
 # MODEL
 # = Mistral v0.2,  Mistral Instruct
@@ -90,7 +82,7 @@ class MyCustomHandler(BaseCallbackHandler):
 # ----------------------
 
 # LLM is not possible to use with function calls
-llm = Ollama(model="mistral:v0.2", callbacks=[MyCustomHandler()]) # returns TEXT
+llm = Ollama(model="mistral:v0.2", callbacks=[MyCustomHandler()])  # returns TEXT
 # llm = Ollama(model="mistral:instruct", callbacks=[MyCustomHandler()]) # returns TEXT
 # llm = ChatOllama(model="mistral:v0.2", callbacks=[MyCustomHandler()]) # returns MESSAGE object
 # llm = ChatOllama(model="mistral:instruct", callbacks=[MyCustomHandler()]) # returns MESSAGE object
