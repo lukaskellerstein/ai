@@ -57,6 +57,7 @@ print(prompt)
 # Custom callback - to track what is happening during invoking
 # ----------------------
 
+
 class MyCustomHandler(BaseCallbackHandler):
     def on_llm_start(self, _, prompts, *args, **kwargs) -> None:
         print(f"on_llm_start callback:")
@@ -77,16 +78,14 @@ class MyCustomHandler(BaseCallbackHandler):
         # print(kwargs)
 
 
-
-
 # ----------------------
 # MODEL
 # = Mistral v0.2,  Mistral Instruct
 # NO HISTORY !!!
 # ----------------------
-        
+
 # model
-llm = OpenAI(model="gpt-3.5-turbo-instruct", temperature=0.9, callbacks=[MyCustomHandler()])
+llm = OpenAI(model="gpt-3.5-turbo", temperature=0.9, callbacks=[MyCustomHandler()])
 # llm = ChatOpenAI(model="gpt-4", temperature=0.9, callbacks=[MyCustomHandler()])
 
 # ----------------------

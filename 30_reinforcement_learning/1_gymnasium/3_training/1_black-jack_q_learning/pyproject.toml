@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "basics"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0.0"
+gymnasium = "^0.29.1"
+matplotlib = "^3.9.1"
+seaborn = "^0.13.2"
+tqdm = "^4.66.4"
+pyqt6 = "^6.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,4 +1,12 @@
 import autogen
+from dotenv import load_dotenv, find_dotenv
+
+_ = load_dotenv(find_dotenv())  # read local .env file
+
+config_list = {
+    "model": "gpt-3.5-turbo",
+    "api_key": "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",
+}
 
 config_list = autogen.config_list_from_json(
     "OAI_CONFIG_LIST.json",
@@ -13,10 +21,7 @@ llm_config = {
 }
 
 # create an AssistantAgent instance named "assistant"
-assistant = autogen.AssistantAgent(
-    name="assistant",
-    llm_config=llm_config
-)
+assistant = autogen.AssistantAgent(name="assistant", llm_config=llm_config)
 
 # create a UserProxyAgent instance named "user_proxy"
 user_proxy = autogen.UserProxyAgent(
