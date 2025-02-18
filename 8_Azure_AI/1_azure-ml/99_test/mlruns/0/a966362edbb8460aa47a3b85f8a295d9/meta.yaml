@@ -1,0 +1,15 @@
+artifact_uri: file:///home/lukas/Projects/Github/lukaskellerstein/ai/9_Azure_AI/mlruns/0/a966362edbb8460aa47a3b85f8a295d9/artifacts
+end_time: 1690980707792
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a966362edbb8460aa47a3b85f8a295d9
+run_name: casual-fox-664
+run_uuid: a966362edbb8460aa47a3b85f8a295d9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1690980656582
+status: 3
+tags: []
+user_id: lukas

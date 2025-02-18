@@ -6,19 +6,6 @@
 
 **Deep learning** is a type of machine learning that involves the use of artificial neural networks, which are modeled after the structure and function of the human brain. Deep learning algorithms can automatically extract features from data, allowing them to learn from complex and large datasets. Examples of deep learning applications include speech recognition, object detection, and autonomous driving. Deep learning has shown great potential for solving complex problems in various fields, from healthcare to finance to robotics.
 
-NEXT STEPS:
-
-1. Custom Pytorch Transformer ----> need to finish LATER
-2. Udemy Pytorch course - custom dataset --> NOW
-3. Udemy Pytorch course - going modular
-4. Udemy Pytorch course - transfer learning (use existing model)
-5. Udemy Pytorch course - experiment tracking (tensorboard)
-6. Use HuggingFace model and dataset with Pytorch
-7. langchain
-
-8. Udemy Pytorch course - paper replication (how to recreate model according to the scientific/academic research paper)
-9. Udemy Pytorch course - model deployment
-
 ## Notes
 
 Release disk space for WSL2: https://stephenreescarter.net/how-to-shrink-a-wsl2-virtual-disk/
@@ -34,7 +21,6 @@ Release disk space for WSL2: https://stephenreescarter.net/how-to-shrink-a-wsl2-
    - Prompt
    - Prompt engineering
    - Chat
-   - **Chatbot implementation**
 3. Hugging Face
    - Explore
      - text2text-generation
@@ -46,7 +32,17 @@ Release disk space for WSL2: https://stephenreescarter.net/how-to-shrink-a-wsl2-
      - Run (32bit, 16bit, 8bit, 4bit) (CPU vs. GPU) (Accelerate)
      - Train / Fine-tune
    - Datasets
-   - **Chatbot implementation enhacements**
-     - text to image
-     - text to speech
+   - Multimodal models
 4. Langchain
+
+## Finish
+
+- Fine-tuning multimodal models
+
+- Autogen
+
+  - Agent with RAG (ideally ChromaDB)
+
+- Semantic-kernel
+
+  - Agent with RAG (ideally ChromaDB)

@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "project1"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-dotenv = "^1.0.1"
+langchain = "^0.2.5"
+langchain-community = "^0.2.5"
+langchain-core = "^0.2.9"
+langchain-openai = "^0.1.9"
+langchain-experimental = "^0.0.62"
+langgraph = "^0.1.4"
+langsmith = "^0.1.82"
+pyqt6 = "^6.7.0"
+pillow = "^10.3.0"
+devtools = "^0.12.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

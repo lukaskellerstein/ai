@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "my-sk-rag-text"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.8"
+semantic-kernel = "^1.20.0"
+uuid = "^1.30"
+chromadb = "^0.6.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

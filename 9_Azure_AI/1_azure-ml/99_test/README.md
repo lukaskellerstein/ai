@@ -1,4 +1,0 @@
-kelly_ai_datastore
-
-Account Key: 6sa4df56asd45ad4a65f4as4f6a4sd65af45a564f
-Account Key (base64): NnNhNGRmNTZhc2Q0NWFkNGE2NWY0YXM0ZjZhNHNkNjVhZjQ1YTU2NGY=
