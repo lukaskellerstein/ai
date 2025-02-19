@@ -8,7 +8,6 @@ import uuid
 # and save on disk
 # -----------------------------------------
 
-
 # Initialize ChromaDB client 
 client = chromadb.PersistentClient(path="chromadb") 
 

@@ -41,8 +41,13 @@ Release disk space for WSL2: https://stephenreescarter.net/how-to-shrink-a-wsl2-
 
 - Autogen
 
-  - Agent with RAG (ideally ChromaDB)
+  - Agent with RAG (ideally ChromaDB) = Memory ?? https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/memory.html
+
+  - Team - SelectorGroupChat with Human-in-the-loop - https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/selector-group-chat.html
+
+  - Team - Magentic-One - https://microsoft.github.io/autogen/stable/user-guide/agentchat-user-guide/magentic-one.html
 
 - Semantic-kernel
 
   - Agent with RAG (ideally ChromaDB)
+  - Orchestration of Agents = Teams ??
