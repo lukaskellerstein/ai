@@ -5,7 +5,6 @@ import pygame
 
 BLACK = (0, 0, 0)
 
-
 class PygameGridEnv(gym.Env):
 
     all_moves = []
@@ -136,34 +135,3 @@ class PygameGridEnv(gym.Env):
         # Cleanup any resources used by the environment
         pygame.quit()
 
-
-# Registering the Environment
-from gymnasium.envs.registration import register
-
-register(
-    id="PygameGridEnv-v0",
-    entry_point="__main__:PygameGridEnv",  # Adjust this to match your module and class name
-)
-
-# Using the Custom Environment
-import gymnasium as gym
-
-# Ensure the custom environment is registered
-register(
-    id="PygameGridEnv-v0",
-    entry_point="__main__:PygameGridEnv",
-)
-
-# Create an instance of the custom environment
-env = gym.make("PygameGridEnv-v0")
-
-# Interact with the environment
-state, info = env.reset()
-done = False
-
-while not done:
-    action = env.action_space.sample()  # Sample a random action
-    state, reward, terminated, truncated, info = env.step(action)
-    done = terminated or truncated
-
-env.close()

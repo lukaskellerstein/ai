@@ -6,6 +6,8 @@
 
 **Deep learning** is a type of machine learning that involves the use of artificial neural networks, which are modeled after the structure and function of the human brain. Deep learning algorithms can automatically extract features from data, allowing them to learn from complex and large datasets. Examples of deep learning applications include speech recognition, object detection, and autonomous driving. Deep learning has shown great potential for solving complex problems in various fields, from healthcare to finance to robotics.
 
+**Reinforcement learning** is another important subset of machine learning that focuses on training agents to make decisions by interacting with an environment. In reinforcement learning, an agent learns through trial and error, receiving rewards or penalties based on its actions. The goal is to maximize cumulative rewards over time by learning an optimal strategy, or policy, for decision-making.
+
 ## Notes
 
 Release disk space for WSL2: https://stephenreescarter.net/how-to-shrink-a-wsl2-virtual-disk/
@@ -51,3 +53,8 @@ Release disk space for WSL2: https://stephenreescarter.net/how-to-shrink-a-wsl2-
 
   - Agent with RAG (ideally ChromaDB)
   - Orchestration of Agents = Teams ??
+
+- Reinforcement learning
+
+  - Gymansium environments
+  - Stable-baseline 3

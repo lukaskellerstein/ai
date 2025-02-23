@@ -5,13 +5,20 @@ import setup
 env = gym.make("CustomEnv-v0")
 
 # Interact with the environment
-state = env.reset()
+state, info = env.reset()
 done = False
 
+# AGENT --------------------------------------------
 while not done:
-    action = env.action_space.sample()  # Sample a random action
+
+    # Agent selects an action = Sample a random action
+    action = env.action_space.sample()  
+
+     # Agent applies the action
     state, reward, terminated, truncated, info = env.step(action)
+    
     env.render()
     done = terminated or truncated
+# --------------------------------------------
 
 env.close()

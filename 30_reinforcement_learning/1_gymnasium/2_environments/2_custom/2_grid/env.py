@@ -11,8 +11,19 @@ class Grid2DEnv(gym.Env):
         # Actions: 0 = move up, 1 = move down, 2 = move left, 3 = move right
         self.action_space = spaces.Discrete(4)
 
+        print("----------------------------")
+        print("ACTION SPACE")
+        print("0 (up) 1 (down) 2 (left) 3 (right)")
+        print("----------------------------") 
+
         # Observations: the current position on the grid (row, column)
         self.observation_space = spaces.Box(low=0, high=4, shape=(2,), dtype=np.int32)
+        
+        print("----------------------------")
+        print("OBSERVATION SPACE (Indexes)")
+        for i in range(5):
+            print(" ".join(f"{i},{j}" for j in range(5)))
+        print("----------------------------") 
 
         # Set the goal position
         self.goal_position = np.array([4, 4], dtype=np.int32)
@@ -20,7 +31,13 @@ class Grid2DEnv(gym.Env):
         # Initialize the state
         self.state = None
 
+        # Initialize step counter
+        self.step_counter = 0
+
     def step(self, action):
+        # Increment step counter
+        self.step_counter += 1
+
         # Implement logic for taking a step in the environment
         row, col = self.state
         if action == 0 and row > 0:
@@ -34,10 +51,15 @@ class Grid2DEnv(gym.Env):
 
         self.state = np.array([row, col], dtype=np.int32)
 
+        action_text = ["up", "down", "left", "right"][action]
+        print(f"Step: {self.step_counter} ---> Action: {action}={action_text}, State: {self.state}, Goal: {self.goal_position}")
+
         # Calculate reward
         if np.array_equal(self.state, self.goal_position):
             reward = 1.0
             terminated = True
+            # Print summary when episode finishes
+            print(f"Episode finished in {self.step_counter} steps")
         else:
             reward = -0.01
             terminated = False
@@ -54,7 +76,15 @@ class Grid2DEnv(gym.Env):
     def reset(self, seed=None, options=None):
         # Reset the state of the environment to an initial state
         super().reset(seed=seed)  # Initialize the random number generator with the seed
+        
+        # Randomly initialize the agent's position
         self.state = np.random.randint(0, 5, size=(2,), dtype=np.int32)
+
+        print("----------------------------")
+        print("INITIAL STATE")
+        self.render()
+        print("----------------------------")                           
+
         info = {}
         return self.state, info
 

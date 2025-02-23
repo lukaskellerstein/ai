@@ -11,14 +11,28 @@ class CustomEnv(gym.Env):
         # Actions: 0 = move left, 1 = move right
         self.action_space = spaces.Discrete(2)
 
+        print("----------------------------")
+        print("ACTION SPACE")
+        print("0 (left) 1 (right)")
+        print("----------------------------") 
+
         # Observations: the current position on the grid
         self.observation_space = spaces.Discrete(10)
+
+        print("----------------------------")
+        print("OBSERVATION SPACE (Indexes)")
+        print(" ".join(f"{i}" for i in range(self.observation_space.n)))
+        print("----------------------------") 
 
         # Set the goal position
         self.goal_position = 9
 
+        # Initialize step counter
+        self.step_counter = 0
+
     def step(self, action):
-        print(f"Action: {action}")
+        # Increment step counter
+        self.step_counter += 1
 
         # Implement logic for taking a step in the environment
         if action == 0:
@@ -26,10 +40,15 @@ class CustomEnv(gym.Env):
         elif action == 1:
             self.state = min(self.observation_space.n - 1, self.state + 1)
 
+        action_text = "left" if action == 0 else "right"
+        print(f"Step: {self.step_counter} ---> Action: {action}={action_text}, State: {self.state}, Goal: {self.goal_position}")
+
         # Calculate reward
         if self.state == self.goal_position:
             reward = 1.0
             terminated = True
+            # Print summary when episode finishes
+            print(f"Episode finished in {self.step_counter} steps")
         else:
             reward = -0.01
             terminated = False
@@ -46,6 +65,12 @@ class CustomEnv(gym.Env):
         # Reset the state of the environment to an initial state
         super().reset(seed=seed)  # Initialize the random number generator with the seed
         self.state = np.random.randint(0, self.observation_space.n)
+
+        print("----------------------------")
+        print("INITIAL STATE")
+        self.render()
+        print("----------------------------") 
+
         info = {}
         return self.state, info
 
