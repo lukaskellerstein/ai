@@ -1,12 +1,10 @@
+import os
+import asyncio
+import joblib
 from autogen_agentchat.agents import AssistantAgent
-from autogen_agentchat.teams import RoundRobinGroupChat
 from autogen_agentchat.ui import Console
 from autogen_ext.models.openai import OpenAIChatCompletionClient, AzureOpenAIChatCompletionClient
 from dotenv import load_dotenv, find_dotenv
-import asyncio
-import os
-from autogen_agentchat.conditions import TextMentionTermination
-import joblib
 
 load_dotenv(find_dotenv())  # read local .env file
 
