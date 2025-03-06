@@ -1,46 +1,53 @@
+from pprint import pprint
 from autogen_agentchat.agents import AssistantAgent
-from autogen_agentchat.teams import RoundRobinGroupChat
-from autogen_agentchat.ui import Console
 from autogen_ext.models.openai import OpenAIChatCompletionClient, AzureOpenAIChatCompletionClient
+from autogen_agentchat.conditions import TextMessageTermination
+from autogen_agentchat.teams import RoundRobinGroupChat
 from dotenv import load_dotenv, find_dotenv
+from autogen_agentchat.ui import Console
 import asyncio
 import os
-from autogen_agentchat.conditions import TextMentionTermination
 
 load_dotenv(find_dotenv())  # read local .env file
 
 # --------------------------------------------
-# Team of AI Agents
+# Team of ONE AI Agent
 # 
-# Finishes when: MAX TURNS
+# Called in the loop
 # --------------------------------------------
 
 llm = OpenAIChatCompletionClient(
     model="gpt-4o-mini",
-    api_key=os.getenv("OPENAI_API_KEY")
+    api_key=os.getenv("OPENAI_API_KEY"),
+    parallel_tool_calls=False,
 )
 
+# Define a tool
+async def get_weather(city: str) -> str:
+    return f"The weather in {city} is 73 degrees and Sunny."
+
+async def get_stock_price(ticker: str) -> str:
+    return f"The stock {ticker} price is 409 USD per share."
+
+# Main function
 async def main() -> None:
-    my_agent_1 = AssistantAgent(
-        name="my_agent_1",
-        model_client=llm,
+    agent = AssistantAgent(
+        name="my_assistant", 
+        model_client=llm, 
         system_message="You are a helpful AI assistant.",
+        tools=[get_weather, get_stock_price]
     )
 
-    my_agent_2 = AssistantAgent(
-        name="my_agent_2",
-        model_client=llm,
-        system_message="Provide constructive feedback.",
+    termination_condition = TextMessageTermination("my_assistant")
+
+    team = RoundRobinGroupChat(
+        [agent],
+        termination_condition=termination_condition,
     )
 
-    # Team of agents
-    agent_team = RoundRobinGroupChat(
-        [my_agent_1, my_agent_2], 
-        max_turns=10 
-    )
-
-    stream = agent_team.run_stream(task="Is a Subaru Impreza STI a good car?")
+    stream = team.run_stream(task="What is stock price for AAPL, MSFT, GOOG?")
     await Console(stream)
+
 
 # NOTE: if running this inside a Python script you'll need to use asyncio.run(main()).
 asyncio.run(main())
