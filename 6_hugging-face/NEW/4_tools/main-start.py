@@ -5,7 +5,8 @@ from dotenv import load_dotenv
 load_dotenv() 
 
 client = OpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    base_url="https://router.huggingface.co/hf-inference/v1",
+    api_key=os.environ.get("HF_TOKEN"),
 )
 
 tools = [
@@ -46,7 +47,7 @@ tools = [
 ]
 
 response = client.chat.completions.create(
-    model="gpt-4o",
+    model="meta-llama/Llama-3.2-3B-Instruct", 
     messages=[
         {"role": "developer", "content": "You are an AI assistant."},
         {
@@ -54,6 +55,7 @@ response = client.chat.completions.create(
             "content": "What is the current stock price for MSFT?",
         },
     ],
+    max_tokens=500,
     tools=tools, # CUSTOM TOOLS
     tool_choice="auto"
 )

@@ -10,7 +10,8 @@ load_dotenv()
 
 # Initialize OpenAI client
 client = OpenAI(
-    api_key=os.environ.get("OPENAI_API_KEY"),
+    base_url="https://router.huggingface.co/hf-inference/v1",
+	api_key=os.environ.get("HF_TOKEN"),
 )
 
 # Function Implementations
@@ -69,7 +70,7 @@ available_functions = {
 }
 
 # Function to process messages and handle function calls
-def get_completion_from_messages(messages, model="gpt-4o"):
+def get_completion_from_messages(messages, model="meta-llama/Llama-3.2-3B-Instruct"):
     response = client.chat.completions.create(
         model=model,
         messages=messages,
@@ -87,7 +88,7 @@ def get_completion_from_messages(messages, model="gpt-4o"):
 
         # Extract tool name and arguments
         function_name = tool_call.function.name
-        function_args = json.loads(tool_call.function.arguments) 
+        function_args = tool_call.function.arguments
         tool_id = tool_call.id
         
         # Call the function
@@ -96,6 +97,7 @@ def get_completion_from_messages(messages, model="gpt-4o"):
 
         messages.append({
             "role": "assistant",
+            "content": '',
             "tool_calls": [
                 {
                     "id": tool_id,  
