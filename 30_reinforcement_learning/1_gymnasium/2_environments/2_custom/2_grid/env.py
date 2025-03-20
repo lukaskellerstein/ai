@@ -1,3 +1,4 @@
+from typing import Any
 import gymnasium as gym
 from gymnasium import spaces
 import numpy as np
@@ -34,7 +35,7 @@ class Grid2DEnv(gym.Env):
         # Initialize step counter
         self.step_counter = 0
 
-    def step(self, action):
+    def step(self, action: Any):
         # Increment step counter
         self.step_counter += 1
 
