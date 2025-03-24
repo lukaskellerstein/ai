@@ -21,6 +21,12 @@ async def start():
             print("Ping result:")
             print(ping_result)
 
+            # List tools
+            tools_list_response = await session.list_tools()
+            print("Available tools:")
+            for tool in tools_list_response.tools:
+                print(f"Tool name: {tool.name}, Description: {tool.description}")
+
             # Call the tool
             response = await session.call_tool(tool_name, {"query": query})
             print("Tool response:")
