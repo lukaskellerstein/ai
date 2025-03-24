@@ -3,7 +3,7 @@ from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
 async def main():
-    server_script = "../server/main.py"  # Path to the MCP server script
+    server_script = "../my_server/main.py"  # Path to the MCP server script
     tool_name = "get_stock_price"  # Tool to call (e.g., "get_stock_price" or "get_dividend_date")
     ticker = "MSFT"  # Default stock ticker
     
