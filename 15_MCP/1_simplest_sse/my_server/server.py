@@ -118,32 +118,8 @@ def serve():
     @app.read_resource()
     async def handle_read_resource(uri: AnyUrl) -> list[ReadResourceContents]:
 
-        print("READ RESOURCE")
-        print(uri)
-        print(type(uri))
-
+        # Need to convert to string
         uri = str(uri)
-
-        print(uri == "string:///hello")
-        print(uri == "string:///sample.txt")
-        print(uri == "binary:///image")
-
-        # if str(uri) == "string:///hello":
-        #     return "Hello"
-
-        # if str(uri) == "string:///sample.txt":
-        #     print("READING FILE's content")
-        #     log_contents = read_sample_file()
-        #     return log_contents
-        
-        # if str(uri) == "binary:///image":
-        #     # Path to your image file
-        #     IMAGE_PATH = os.path.join(os.path.dirname(__file__), "resources", "test_image.png")
-        #     print("READING IMAGE AS BYTES")
-        #     with open(IMAGE_PATH, "rb") as img_file:
-        #         image_bytes = img_file.read()
-                
-        #     return image_bytes
 
         if uri == "string:///hello":
             return [
@@ -166,19 +142,6 @@ def serve():
             image_path = os.path.join(os.path.dirname(__file__), "resources", "test_image.png")
             with open(image_path, "rb") as f:
                 image_bytes = f.read()
-
-
-            with open("original_check.png", "wb") as f:
-                f.write(image_bytes)
-
-            print("IMAGE BYTES LEN:", len(image_bytes))
-            import base64
-            b64_str = base64.b64encode(image_bytes).decode()
-            
-            print("Expected base64 length:", len(base64.b64encode(image_bytes).decode()))
-            
-            print("SAMPLE BASE64 (start):", b64_str[:100])  # Just a sample
-            print("SAMPLE BASE64 (end):", b64_str[-100:])  # Just a sample
 
             return [
                 ReadResourceContents(
