@@ -95,21 +95,6 @@ wheels = [
 ]
 
 [[package]]
-name = "client"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "mcp" },
-    { name = "yfinance" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "mcp", specifier = ">=1.4.1" },
-    { name = "yfinance", specifier = ">=0.2.54" },
-]
-
-[[package]]
 name = "colorama"
 version = "0.4.6"
 source = { registry = "https://pypi.org/simple" }
@@ -210,6 +195,21 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/6f/75/345e196762fc51fb5b4e9504631972b1271a0cb2ba1ce2afe5b185c95b64/multitasking-0.0.11.tar.gz", hash = "sha256:4d6bc3cc65f9b2dca72fb5a787850a88dae8f620c2b36ae9b55248e51bcd6026", size = 8150 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/3e/8a/bb3160e76e844db9e69a413f055818969c8acade64e1a9ac5ce9dfdcf6c1/multitasking-0.0.11-py3-none-any.whl", hash = "sha256:1e5b37a5f8fc1e6cfaafd1a82b6b1cc6d2ed20037d3b89c25a84f499bd7b3dd4", size = 8533 },
+]
+
+[[package]]
+name = "my-client"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "mcp" },
+    { name = "yfinance" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "mcp", specifier = ">=1.4.1" },
+    { name = "yfinance", specifier = ">=0.2.54" },
 ]
 
 [[package]]
